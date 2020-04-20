@@ -81,7 +81,7 @@ getAllWinners(getYears(getFinals(fifaData)), getWinners(getFinals(fifaData)) );
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(data) {
+function getCountryWins(data, TI) {
     const winners = data.map(item => {
         if(item['Home Team Goals'] > item['Away Team Goals']) {
             return item['Home Team Initials']
@@ -89,15 +89,15 @@ function getCountryWins(data) {
             return item['Away Team Initials']
         } 
     })
-  return winners.reduce((prev, cur) => {
+    let arr = winners.reduce((prev, cur) => {
         prev[cur] = (prev[cur] || 0) + 1;
         return prev;
     }, {});
-    
+    return arr[TI]
 
 };
 
-console.log(getCountryWins(getFinals(fifaData)));
+console.log(getCountryWins(getFinals(fifaData), "BRA"));
 
 
 /* Task 8: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
