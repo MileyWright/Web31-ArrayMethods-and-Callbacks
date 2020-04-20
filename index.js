@@ -81,15 +81,19 @@ getAllWinners(getYears(getFinals(fifaData)), getWinners(getFinals(fifaData)) );
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(data, teamInitials) {
-    const winners = data.filter(item => {
+function getCountryWins(data) {
+    const winners = data.map(item => {
         if(item['Home Team Goals'] > item['Away Team Goals']) {
             return item['Home Team Initials']
         } else if(item['Home Team Goals'] < item['Away Team Goals']) {
             return item['Away Team Initials']
         } 
     })
-    return winners
+  return winners.reduce((prev, cur) => {
+        prev[cur] = (prev[cur] || 0) + 1;
+        return prev;
+    }, {});
+    
 
 };
 
